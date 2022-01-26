@@ -1,0 +1,34 @@
+<%- include('header') %>
+<br>
+<div class="container-md">
+    <h2><%= article.titre %> </h2>
+    <i><p style="font-size: small;"><%= article.auteur %> - <%= article.dateA.toDateString() %></p></i>
+    <p><%= article.description %> </p>
+</div>
+<body>
+    <% if(commentaires.length!=0){ %> 
+    <div class="container-commentaires">
+        <h1>Commentaire(s)</h1>
+        <% for(const commentaire of commentaires){ %>
+            <div class="message">
+                <p><%= commentaire.pseudo %> a posté le <%= commentaire.dateMessage.getDate() + "-" + (commentaire.dateMessage.getMonth() + 1) + "-" + commentaire.dateMessage.getFullYear() %></p>
+                <p>Commentaire : <%= commentaire.message %> </p>
+            </div>
+        <% } %>    
+    </div>
+    <% } else { %> 
+        <div class="container-commentaires">
+            <p>Aucun commentaire</p>
+        </div>
+    <% } %> 
+    <form method="post">
+        <fieldset>
+            <legend>Ecrire un commentaire</legend>
+            <label for="nom">Pseudo </label>
+            <input type="text" name="pseudo" required></input><br><br>
+            <label for="prenom">Commentaire </label>
+            <textarea id="message" name="message" rows="5" cols="33" required></textarea><br><br>
+            <button>Envoyer</button>
+        </fieldset>
+    </form>
+</body>

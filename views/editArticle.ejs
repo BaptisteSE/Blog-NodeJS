@@ -1,0 +1,49 @@
+<%- include('header') %>
+    <div class="form">
+        <form method="POST" enctype="multipart/form-data">
+            <fieldset>
+                <legend style="text-align: center;">Modification de l'article n°<%= article.idA %>
+                </legend>
+                <label for="titre">Titre *</label>
+                <input type="text" name="titre" placeholder="Saisir le titre de l'article" size="150"
+                    value="<%= article.titre %>" required><br><br>
+                <label for="description">Description *</label>
+                <textarea name="description" rows="5" cols="150" placeholder="Saisir la description"
+                    required><%= article.description %></textarea><br><br>
+                <label for="auteur">Auteur de l'article *</label>
+                <input type="text" name="auteur" placeholder="auteur" value="<%= article.auteur %>" required><br><br>
+                <label for="date">Date de l'article *</label>
+                <input type="date" name="date" placeholder="Saisir la date de l'article"
+                    value="<%= article.dateA.getFullYear()+" -"+article.dateA.getMonth()+1+"-"%>
+                <%=(article.dateA.getDate()<10)?"0"+article.dateA.getDate():article.dateA.getDate() %>"
+                    required><br><br>
+                    <% if(article.image!=null){ %>
+                        <p>Image actuelle</p>
+                        <img class="mr-3" src="/img/<%= article.image %>" alt="" width="128" height="128">
+                        <% } %>
+                            <label for="photo">Importer une photo pour l'article</label>
+                            <input type="file" name="photo" value="<%= article.image %>"><br><br>
+                            <label for="idCateg">Sélectionner la catégorie *</label>
+                            <select name="idCateg" required>
+                                <option value="" disabled>Saisir une catégorie</option>
+                                <% if(article.idCateg!=null){ %>
+                                    <% for(const categorie of categories){ %>
+                                        <% if(article.idCateg==categorie.idCateg){ %>
+                                            <option value="<%= categorie.idCateg %>" selected>
+                                                <%= categorie.libelle %>
+                                            </option>
+                                            <% } %>
+                                                <% if(article.idCateg!=categorie.idCateg){ %>
+                                                    <option value="<%= categorie.idCateg %>">
+                                                        <%= categorie.libelle %>
+                                                    </option>
+                                                    <% } %>
+                                                        <% } %>
+                                                            <% } %>
+                            </select><br><br>
+                            <div class="text-center">
+                                <button>Modifier l'article</button><br><br>
+                            </div>
+            </fieldset>
+        </form>
+    </div>

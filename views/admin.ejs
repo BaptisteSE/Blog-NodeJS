@@ -1,0 +1,22 @@
+<%- include('header') %>
+    <div class="form">
+        <form method="POST" enctype="multipart/form-data">
+            <fieldset>
+                <legend style="text-align: center;">Connexion</legend>
+                <label for="email">Email : *</label>
+                <input type="email" value="admin@gmail.com" name="email" placeholder="email@exemple.fr" size="50"
+                    required><br><br>
+                <label for="mdp">Mot de passe : *</label>
+                <input type="password" value="admin" name="mdp" placeholder="Saisir votre mot de passe" size="50"
+                    required><br><br>
+                <div class="text-center">
+                    <button>Se connecter</button><br><br>
+                </div>
+                <% if(locals.message){ %>
+                    <p style="text-align: center;">
+                        <%= message %>
+                    </p>
+                    <% } %>
+            </fieldset>
+        </form>
+    </div>

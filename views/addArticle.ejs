@@ -1,0 +1,31 @@
+<%- include('header') %>
+    <div class="form">
+        <form method="POST" enctype="multipart/form-data">
+            <fieldset>
+                <legend style="text-align: center;">Ajouter un article</legend>
+                <label for="titre">Titre *</label>
+                <input type="text" name="titre" placeholder="Saisir le titre de l'article" size="150" required><br><br>
+                <label for="description">Description *</label>
+                <textarea name="description" rows="5" cols="150" placeholder="Saisir la description"
+                    required></textarea><br><br>
+                <label for="auteur">Autheur de l'article *</label>
+                <input type="text" name="auteur" placeholder="auteur" required><br><br>
+                <label for="date">Date de l'article *</label>
+                <input type="date" name="date" placeholder="Saisir la date de l'article" required><br><br>
+                <label for="photo">Importer une photo pour l'article *</label>
+                <input type="file" name="photo" required><br><br>
+                <label for="categ">Sélectionner la catégorie *</label>
+                <select name="categ" required>
+                    <option value="" disabled selected>Saisir une catégorie</option>
+                    <% for(const categorie of categories){ %>
+                        <option value="<%= categorie.idCateg %>">
+                            <%= categorie.libelle %>
+                        </option>
+                        <% } %>
+                </select><br><br>
+                <div class="text-center">
+                    <button>Créer l'article</button><br><br>
+                </div>
+            </fieldset>
+        </form>
+    </div>
