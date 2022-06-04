@@ -106,7 +106,7 @@ app.post('/admin', function (req, res) {
         })
         console.log(email);
         bcrypt.hash(fields.mdp, 10, function (err, hash) {
-            console.log(hash);
+            //console.log(hash);
         })
     })
 
@@ -114,7 +114,9 @@ app.post('/admin', function (req, res) {
 
 
 app.get('/', function (req, res) {
-    pool.query("SELECT *, COUNT(c.idC) AS nb FROM article a JOIN commentaire c ON a.idA = c.idA GROUP BY (c.idA) ORDER BY dateA DESC", function (error, articles, fields) {
+    // SI COMMENTAIRE(S)
+    // SQL AVANT : SELECT *, COUNT(c.idC) AS nb FROM article a JOIN commentaire c ON a.idA = c.idA GROUP BY (c.idA) ORDER BY dateA DESC
+    pool.query("SELECT * FROM article a ORDER BY dateA DESC", function (error, articles, fields) {
         pool.query("SELECT * FROM categorie", function (error, categories, fields) {
             console.log(articles);
             res.render('home.ejs', {
@@ -148,8 +150,8 @@ app.post('/editArticle/:id', function (req, res) {
 
     // parser les données qui sont issues du form
     form.parse(req, function (err, fields, files) {
-        console.log(fields);
-        console.log(files);
+        //console.log(fields);
+        //console.log(files);
         //récupérer le chemin de l'image temporaire
         if (files.photo.originalFilename != "") {
             let oldpath = files.photo.filepath;
@@ -165,7 +167,7 @@ app.post('/editArticle/:id', function (req, res) {
             })
         } else {
             pool.query("UPDATE article SET titre=?, description=?, auteur=?, dateA=?, idCateg=? WHERE idA=?", [fields.titre, fields.description, fields.auteur, fields.date, fields.idCateg, req.params.id], function (error, fields) {
-                console.log(error);
+                //console.log(error);
                 res.redirect('/');
             })
         }
@@ -187,7 +189,7 @@ app.post('/article/:id', function (req, res) {
     const form = formidable();
     form.parse(req, function (err, fields, files) {
         pool.query('INSERT INTO commentaire (pseudo, message, dateMessage, idA) VALUES (?,?,NOW(),?)', [fields.pseudo, fields.message, req.params.id], function (error, result) {
-            console.log(err);
+            //console.log(err);
             res.redirect('/article/' + req.params.id);
         })
     })
