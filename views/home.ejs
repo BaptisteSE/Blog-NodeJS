@@ -31,9 +31,11 @@
                                 <%= article.description %>
                             </p>
                             <p>
-                                
-                                <%= article.nb %> 
-                            
+                                <% if(article.nb>1){ %>
+                                    <p><%= article.nb %> commentaires</p>
+                                <% }else{ %>
+                                    <p><%= article.nb %> commentaire</p>
+                                <% } %> 
                             </p>
                             <% if(isAdmin==true){ %>
                         </div>
